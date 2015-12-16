@@ -21,6 +21,10 @@ include art/build/Android.executable.mk
 DEX2OAT_SRC_FILES := \
 	dex2oat.cc
 
+ifeq ($(TARGET_NEEDS_LONG_TIMEOUTS),true)
+  LOCAL_CFLAGS += -DNEEDS_LONG_TIMEOUTS=1
+endif
+
 # TODO: Remove this when the framework (installd) supports pushing the
 # right instruction-set parameter for the primary architecture.
 ifneq ($(filter ro.zygote=zygote64,$(PRODUCT_DEFAULT_PROPERTY_OVERRIDES)),)
